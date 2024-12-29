@@ -1086,7 +1086,7 @@ def vocab_extend(project_name, symbols, model_type):
         f.write("\n".join(vocab))
 
     if model_type == "F5TTS_small":
-        ckpt_path = str(cached_path("hf://SPRINGLab/F5-Hindi-24KHz/model_2500000.safetensors"))
+        ckpt_path = str(cached_path("hf://Shanos76/f51/model_2500000.pt"))
     else:
         ckpt_path = str(cached_path("hf://SWivid/F5-TTS/F5TTS_Base/model_1200000.pt"))
 
