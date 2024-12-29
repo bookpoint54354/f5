@@ -1741,7 +1741,7 @@ If you encounter a memory error, try reducing the batch size per GPU to a smalle
             gr.Markdown("""```plaintext 
 SOS: Check the use_ema setting (True or False) for your model to see what works best for you. use seed -1 from random
 ```""")
-            exp_name = gr.Radio(label="Model", choices=["F5-TTS", "E2-TTS"], value="F5-TTS")
+            exp_name = gr.Radio(label="Model", choices=["F5-TTS", "F5TTS_small"], value="F5TTS_small")
             list_checkpoints, checkpoint_select = get_checkpoints_project(projects_selelect, False)
 
             with gr.Row():
