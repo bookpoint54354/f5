@@ -1458,7 +1458,7 @@ Check the vocabulary for fine-tuning Emilia_ZH_EN to ensure all symbols are incl
 Using the extended model, you can finetune to a new language that is missing symbols in the vocab. This creates a new model with a new vocabulary size and saves it in your ckpts/project folder.
 ```""")
 
-            exp_name_extend = gr.Radio(label="Model", choices=["F5-TTS", "E2-TTS"], value="F5-TTS")
+            exp_name_extend = gr.Radio(label="Model", choices=["F5-TTS", "F5TTS_small"], value="F5TTS_small")
 
             with gr.Row():
                 txt_extend = gr.Textbox(
