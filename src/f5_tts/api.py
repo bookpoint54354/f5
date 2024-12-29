@@ -24,7 +24,7 @@ from f5_tts.model.utils import seed_everything
 class F5TTS:
     def __init__(
         self,
-        model_type="F5-TTS",
+        model_type="F5TTS_small",
         ckpt_file="",
         vocab_file="",
         ode_method="euler",
@@ -59,7 +59,7 @@ class F5TTS:
         self.vocoder = load_vocoder(vocoder_name, local_path is not None, local_path, self.device, hf_cache_dir)
 
     def load_ema_model(self, model_type, ckpt_file, mel_spec_type, vocab_file, ode_method, use_ema, hf_cache_dir=None):
-        if model_type == "F5-TTS":
+        if model_type == "F5TTS_small":
             if not ckpt_file:
                 if mel_spec_type == "vocos":
                     ckpt_file = str(
@@ -69,7 +69,7 @@ class F5TTS:
                     ckpt_file = str(
                         cached_path("hf://SWivid/F5-TTS/F5TTS_Base_bigvgan/model_1250000.pt", cache_dir=hf_cache_dir)
                     )
-            model_cfg = dict(dim=1024, depth=22, heads=16, ff_mult=2, text_dim=512, conv_layers=4)
+            model_cfg = dict(dim=768, depth=18, heads=12, ff_mult=2, text_dim=512, conv_layers=4)
             model_cls = DiT
         elif model_type == "E2-TTS":
             if not ckpt_file:
@@ -164,3 +164,4 @@ if __name__ == "__main__":
     )
 
     print("seed :", f5tts.seed)
+
