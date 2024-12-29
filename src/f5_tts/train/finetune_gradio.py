@@ -1085,10 +1085,10 @@ def vocab_extend(project_name, symbols, model_type):
     with open(file_vocab_project, "w", encoding="utf-8") as f:
         f.write("\n".join(vocab))
 
-    if model_type == "F5-TTS":
-        ckpt_path = str(cached_path("hf://SWivid/F5-TTS/F5TTS_Base/model_1200000.pt"))
+    if model_type == "F5TTS_small":
+        ckpt_path = str(cached_path("hf://SPRINGLab/F5-Hindi-24KHz/model_2500000.safetensors"))
     else:
-        ckpt_path = str(cached_path("hf://SWivid/E2-TTS/E2TTS_Base/model_1200000.pt"))
+        ckpt_path = str(cached_path("hf://SWivid/F5-TTS/F5TTS_Base/model_1200000.pt"))
 
     vocab_size_new = len(miss_symbols)
 
@@ -1543,7 +1543,7 @@ If you encounter a memory error, try reducing the batch size per GPU to a smalle
                 file_checkpoint_train = gr.Textbox(label="Path to the Pretrained Checkpoint", value="")
 
             with gr.Row():
-                exp_name = gr.Radio(label="Model", choices=["F5TTS_Base", "E2TTS_Base"], value="F5TTS_Base")
+                exp_name = gr.Radio(label="Model", choices=["F5TTS_Base", "F5TTS_small"], value="F5TTS_small")
                 learning_rate = gr.Number(label="Learning Rate", value=1e-5, step=1e-5)
 
             with gr.Row():
