@@ -16,35 +16,35 @@ n_fft = 1024
 mel_spec_type = "vocos"  # 'vocos' or 'bigvgan'
 
 tokenizer = "pinyin"  # 'pinyin', 'char', or 'custom'
-tokenizer_path = None  # if tokenizer = 'custom', define the path to the tokenizer you want to use (should be vocab.txt)
-dataset_name = "Emilia_ZH_EN"
+tokenizer_path = "/content/F5-TTS/data/f5_custom/vocab.txt"  # if tokenizer = 'custom', define the path to the tokenizer you want to use (should be vocab.txt)
+dataset_name = "f5"
 
 # -------------------------- Training Settings -------------------------- #
 
-exp_name = "F5TTS_Base"  # F5TTS_Base | E2TTS_Base
+exp_name = "F5TTS_Small"  # F5TTS_Base | E2TTS_Base
 
-learning_rate = 7.5e-5
+learning_rate = 1e-05 #7.5e-5
 
-batch_size_per_gpu = 38400  # 8 GPUs, 8 * 38400 = 307200
+batch_size_per_gpu = 5000  # 8 GPUs, 8 * 38400 = 307200
 batch_size_type = "frame"  # "frame" or "sample"
 max_samples = 64  # max sequences per batch if use frame-wise batch_size. we set 32 for small models, 64 for base models
 grad_accumulation_steps = 1  # note: updates = steps / grad_accumulation_steps
 max_grad_norm = 1.0
 
 epochs = 11  # use linear decay, thus epochs control the slope
-num_warmup_updates = 20000  # warmup steps
-save_per_updates = 50000  # save checkpoint per steps
-last_per_steps = 5000  # save last checkpoint per steps
+num_warmup_updates = 200  # warmup steps
+save_per_updates = 400  # save checkpoint per steps
+last_per_steps = 800  # save last checkpoint per steps
 
 # model params
-if exp_name == "F5TTS_Base":
+if exp_name == "F5TTS_Small":
+    wandb_resume_id = None
+    model_cls = DiT
+    model_cfg = dict(dim=768, depth=18, heads=12, ff_mult=2, text_dim=512, conv_layers=4)
+elif exp_name == "F5TTS_Base":
     wandb_resume_id = None
     model_cls = DiT
     model_cfg = dict(dim=1024, depth=22, heads=16, ff_mult=2, text_dim=512, conv_layers=4)
-elif exp_name == "E2TTS_Base":
-    wandb_resume_id = None
-    model_cls = UNetT
-    model_cfg = dict(dim=1024, depth=24, heads=16, ff_mult=4)
 
 
 # ----------------------------------------------------------------------- #
